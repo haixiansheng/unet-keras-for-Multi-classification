@@ -7,7 +7,7 @@ import cv2
 model = load_model('V1_828.h5')
 
 X = []
-for info in os.listdir(r'G:\\haihan\\Segmentation_glue\\data\\test'):
+for info in os.listdir(r'G:\\haihan\\Segmentation\\data\\test'):
     A = cv2.imread("data\\test\\" + info)
     X.append(A)
     # i += 1
@@ -17,7 +17,7 @@ Y = model.predict(X)
 
 
 groudtruth = []
-for info in os.listdir(r'G:\\haihan\\Segmentation_glue\\data\\test_groudtruth'):
+for info in os.listdir(r'G:\\haihan\\Segmentation\\data\\test_groudtruth'):
     A = cv2.imread("data\\test_groudtruth\\" + info)
     groudtruth.append(A)
 groudtruth = np.array(groudtruth)
