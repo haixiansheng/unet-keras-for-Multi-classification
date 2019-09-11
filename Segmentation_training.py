@@ -25,8 +25,8 @@ X_CHANNEL = 3  # training data channel
 Y_CHANNEL = 3  # test data channel
 X_NUM = 1800  # your traning data number
 
-pathX = 'G:\\haihan\\Segmentation_glue\data\\train\\image\\'    #change your file path
-pathY = 'G:\\haihan\\Segmentation_glue\data\\train\\label\\'    #change your file path
+pathX = 'G:\\haihan\\Segmentation\data\\train\\image\\'    #change your file path
+pathY = 'G:\\haihan\\Segmentation\data\\train\\label\\'    #change your file path
 
 #data processing
 def generator(pathX, pathY,BATCH_SIZE):
@@ -132,7 +132,7 @@ history = model.fit_generator(generator(pathX, pathY,BATCH_SIZE),
 end_time = datetime.datetime.now().strftime('%Y-%m-%d  %H:%M:%S')
 
  #save your training model
-model.save(r'G:\\haihan\\Segmentation_glue\\V1_828.h5')        
+model.save(r'G:\\haihan\\Segmentation\\V1_828.h5')        
 
 #save your loss data
 mse = np.array((history.history['loss']))
