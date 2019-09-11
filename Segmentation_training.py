@@ -28,7 +28,7 @@ X_NUM = 1800  #
 pathX = 'G:\\haihan\\Segmentation_glue\data\\train\\image\\'    #change your file path
 pathY = 'G:\\haihan\\Segmentation_glue\data\\train\\label\\'    #change your file path
 
-
+#data processing
 def generator(pathX, pathY,BATCH_SIZE):
     while 1:
         X_train_files = os.listdir(pathX)
@@ -56,9 +56,6 @@ def generator(pathX, pathY,BATCH_SIZE):
         X = np.array(X)
         Y = np.array(Y)
         yield X, Y
-        X = []
-        Y = []
-
 
 inputs = Input((PIXEL, PIXEL, 3))
 conv1 = Conv2D(8, 3, activation='relu', padding='same', kernel_initializer='he_normal')(inputs)
