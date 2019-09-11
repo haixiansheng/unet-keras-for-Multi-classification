@@ -17,13 +17,13 @@ from keras import backend as K
 from keras.layers.advanced_activations import LeakyReLU, ReLU
 import cv2
 
-PIXEL = 1024
+PIXEL = 1024    #set your image size
 BATCH_SIZE = 5
 lr = 0.001
 EPOCH = 3
-X_CHANNEL = 3  # 训练样本的通道数
-Y_CHANNEL = 3  # 标签图片的通道数
-X_NUM = 1800  #
+X_CHANNEL = 3  # training data channel
+Y_CHANNEL = 3  # test data channel
+X_NUM = 1800  # your traning data number
 
 pathX = 'G:\\haihan\\Segmentation_glue\data\\train\\image\\'    #change your file path
 pathY = 'G:\\haihan\\Segmentation_glue\data\\train\\label\\'    #change your file path
@@ -57,6 +57,7 @@ def generator(pathX, pathY,BATCH_SIZE):
         Y = np.array(Y)
         yield X, Y
 
+ #creat unet network
 inputs = Input((PIXEL, PIXEL, 3))
 conv1 = Conv2D(8, 3, activation='relu', padding='same', kernel_initializer='he_normal')(inputs)
 pool1 = AveragePooling2D(pool_size=(2, 2))(conv1)  # 16
@@ -128,9 +129,11 @@ model.compile(optimizer=Adam(lr=1e-3), loss='mse', metrics=['accuracy'])
 
 history = model.fit_generator(generator(pathX, pathY,BATCH_SIZE),
                               steps_per_epoch=600, nb_epoch=EPOCH)
-
 end_time = datetime.datetime.now().strftime('%Y-%m-%d  %H:%M:%S')
-model.save(r'G:\\haihan\\Segmentation_glue\\V1_828.h5')         #save your training model
 
+ #save your training model
+model.save(r'G:\\haihan\\Segmentation_glue\\V1_828.h5')        
+
+#save your loss data
 mse = np.array((history.history['loss']))
-np.save(r'G:\\haihan\\Segmentation_glue\\V1_828.npy', mse)      #save your loss data
+np.save(r'G:\\haihan\\Segmentation_glue\\V1_828.npy', mse)      
